@@ -3,6 +3,7 @@ import { createStylingFromTheme } from './createStylingFromTheme';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import ActionList from './ActionList';
 import ActionPreview from './ActionPreview';
+import DevToolsActions from './DevToolsActions'
 import getInspectedState from './getInspectedState';
 import DiffPatcher from './DiffPatcher';
 import { getBase16Theme } from 'react-base16-styling';
@@ -142,11 +143,15 @@ export default class DevtoolsInspector extends Component {
                     styling={styling}
                     onSearch={this.handleSearch}
                     onSelect={this.handleSelectAction} />
-        <ActionPreview {...{ base16Theme, tab, delta, nextState, action, isLightTheme }}
-                       styling={styling}
-                       onInspectPath={this.handleInspectPath.bind(this, inspectedPathType)}
-                       inspectedPath={monitorState[inspectedPathType]}
-                       onSelectTab={this.handleSelectTab} />
+                  <div {...styling('previewAndActionsContainer')}>
+          <ActionPreview {...{ base16Theme, tab, delta, nextState, action, isLightTheme }}
+                         styling={styling}
+                         onInspectPath={this.handleInspectPath.bind(this, inspectedPathType)}
+                         inspectedPath={monitorState[inspectedPathType]}
+                         onSelectTab={this.handleSelectTab} />
+
+          <DevToolsActions dispatch={this.props.dispatch} styling={styling} />
+         </div>
       </div>
     );
   }

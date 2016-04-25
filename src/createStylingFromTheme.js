@@ -30,7 +30,11 @@ const colorMap = theme => ({
   DIFF_REMOVE_COLOR: rgba(theme.base08, 40),
   DIFF_ARROW_COLOR: theme.base0E,
   LINK_COLOR: rgba(theme.base0E, 90),
-  LINK_HOVER_COLOR: theme.base0E
+  LINK_HOVER_COLOR: theme.base0E,
+  DEVTOOLS_ACTION_BUTTON_COLOR: rgba(theme.base00, 70),
+  DEVTOOLS_ACTION_BUTTON_HOVER_COLOR: rgba(theme.base03, 20),
+  DEVTOOLS_ACTION_BUTTON_ACTIVE_COLOR: rgba(theme.base03, 50),
+  DEVTOOLS_ACTION_BUTTON_BORDER_COLOR: rgba(theme.base03, 50),
 });
 
 const getSheetFromColorMap = map => ({
@@ -307,7 +311,58 @@ const getSheetFromColorMap = map => ({
 
   diffUpdateArrow: {
     color: map.DIFF_ARROW_COLOR
-  }
+  },
+
+  previewAndActionsContainer: {
+    display: 'flex',
+    'flex-basis': '60%',
+    'flex-direction': 'column'
+  },
+
+  devToolsActions: {
+    display: 'flex',
+    'justify-content': 'flex-end',
+    position: 'relative',
+    'z-index': 1,
+    'margin-top': '5px',
+    'padding-top': '5px',
+    'padding-bottom': '5px',
+    'background-color': map.HEADER_BACKGROUND_COLOR,
+    'border-top-width': '1px',
+    'border-top-style': 'solid',
+    'border-top-color': map.HEADER_BORDER_COLOR
+  },
+
+  devToolsActionsButton: {
+    cursor: 'pointer',
+    position: 'relative',
+    padding: '5px 10px',
+    'border-style': 'solid',
+    'border-width': '1px',
+    'border-left-width': 0,
+    'background-color': map.DEVTOOLS_ACTION_BUTTON_COLOR,
+
+    '&:first-child': {
+      'border-left-width': '1px',
+      'border-top-left-radius': '3px',
+      'border-bottom-left-radius': '3px'
+    },
+
+    '&:last-child': {
+      'border-top-right-radius': '3px',
+      'border-bottom-right-radius': '3px'
+    },
+
+    '&:hover': {
+      'background-color': map.DEVTOOLS_ACTION_BUTTON_HOVER_COLOR
+    },
+
+    '&:active': {
+      'background-color': map.DEVTOOLS_ACTION_BUTTON_ACTIVE_COLOR
+    },
+
+    'border-color': map.DEVTOOLS_ACTION_BUTTON_BORDER_COLOR
+  },
 });
 
 let themeSheet;
