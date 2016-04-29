@@ -94,6 +94,15 @@ const getSheetFromColorMap = map => ({
     'background-color': map.SELECTED_BACKGROUND_COLOR
   },
 
+  actionListItemSkipped: {
+    'text-decoration': 'line-through'
+  },
+
+  actionListItemTimeAndActionToggle: {
+    display: 'flex',
+    'align-items': 'center'
+  },
+
   actionListItemTime: {
     padding: '4px 6px',
     'border-radius': '3px',
@@ -103,6 +112,11 @@ const getSheetFromColorMap = map => ({
 
     'background-color': map.ACTION_TIME_BACK_COLOR,
     color: map.ACTION_TIME_COLOR
+  },
+
+  toggleAction: {
+    'font-size': '2em',
+    'padding-left': '.25em'
   },
 
   actionListItemName: {
@@ -362,7 +376,7 @@ const getSheetFromColorMap = map => ({
     },
 
     'border-color': map.DEVTOOLS_ACTION_BUTTON_BORDER_COLOR
-  },
+  }
 });
 
 let themeSheet;

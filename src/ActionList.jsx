@@ -1,5 +1,7 @@
 import React from 'react';
 import dateformat from 'dateformat';
+import { ActionCreators } from 'redux-devtools';
+const { toggleAction } = ActionCreators;
 
 function getTime(actions, actionIds, actionId) {
   const idx = actionIds.indexOf(actionId);
@@ -12,7 +14,8 @@ function getTime(actions, actionIds, actionId) {
 
 const ActionList = ({
   styling, actions, actionIds, isWideLayout,
-  selectedActionId, onSelect, onSearch, searchValue
+  selectedActionId, onSelect, onSearch, searchValue,
+  dispatch, skippedActionIds
 }) => {
   const lowerSearchValue = searchValue && searchValue.toLowerCase();
   const filteredActionIds = searchValue ? actionIds.filter(
@@ -29,14 +32,21 @@ const ActionList = ({
         <div key={idx}
              {...styling([
                'actionListItem',
-               actionId === selectedActionId && 'actionListItemSelected'
+               actionId === selectedActionId && 'actionListItemSelected',
+               skippedActionIds.indexOf(actionId) !== -1 && 'actionListItemSkipped'
              ], actionId === selectedActionId)}
              onClick={() => onSelect(actionId)}>
           <div {...styling('actionListItemName')}>
             {actions[actionId].action.type}
           </div>
-          <div {...styling('actionListItemTime')}>
-            {getTime(actions, actionIds, actionId)}
+          <div {...styling('actionListItemTimeAndActionToggle')}>
+            <div {...styling('actionListItemTime')}>
+              {getTime(actions, actionIds, actionId)}
+            </div>
+            <div {...styling('toggleAction')}
+                  onClick={() => dispatch(toggleAction(actionId))}>
+              &#x2716;
+            </div>
           </div>
         </div>
       )}

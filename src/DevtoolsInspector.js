@@ -67,6 +67,7 @@ export default class DevtoolsInspector extends Component {
       initialScrollTop: PropTypes.number
     }),
     preserveScrollTop: PropTypes.bool,
+    skippedActionIds: PropTypes.array,
     stagedActions: PropTypes.array,
     select: PropTypes.func.isRequired,
     theme: PropTypes.oneOfType([
@@ -142,7 +143,9 @@ export default class DevtoolsInspector extends Component {
         <ActionList {...{ actions, actionIds, isWideLayout, searchValue, selectedActionId }}
                     styling={styling}
                     onSearch={this.handleSearch}
-                    onSelect={this.handleSelectAction} />
+                    onSelect={this.handleSelectAction}
+                    skippedActionIds={this.props.skippedActionIds}
+                    dispatch={this.props.dispatch} />
                   <div {...styling('previewAndActionsContainer')}>
           <ActionPreview {...{ base16Theme, tab, delta, nextState, action, isLightTheme }}
                          styling={styling}
